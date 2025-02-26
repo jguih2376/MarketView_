@@ -109,8 +109,8 @@ def app():
         juros_real = (((1 + selic_atual/100) / (1 + ipca_atual/100)) - 1)*100
 
         # Exibir o resultado com tamanho do número alterado
-        st.write(f'<h5 style="text-align:center;"color:white;">Juros Real: <span style="font-size:35px; font-weight:normal;">{juros_real:.2f}%</span></h5>', unsafe_allow_html=True)
-        
+        st.write(f'<h5 style="text-align:center; color:white;">Juros Real: <span style="font-size:35px; font-weight:normal;">{juros_real:.2f}%</span></h5>', unsafe_allow_html=True)
+
 
 
     with col1:
