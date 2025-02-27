@@ -127,11 +127,11 @@ def app():
 
 #________________________________________________________________________________________________________________________________________________________
     st.write('---')
-    # Título da página
+
     st.subheader("Desempenho Relativo dos Ativos")
 
     # Função para carregar os dados usando yfinance
-    @st.cache_data(ttl=600)  # Cache atualizado a cada 10 min
+    @st.cache_data(ttl=600)  
     def carregar_dados(tickers, data_inicio, data_fim):
         if not tickers:
             return pd.DataFrame()
@@ -141,7 +141,7 @@ def app():
             hist = yf.Ticker(ticker).history(start=data_inicio, end=data_fim)['Close']
             dados[ticker] = hist
 
-        return pd.DataFrame(dados).dropna()  # Remove valores NaN
+        return pd.DataFrame(dados).dropna()  
 
     
     def calcular_performance(dados):
@@ -242,7 +242,7 @@ def app():
                 if opcao1 == 'Índices':
                     escolha = st.multiselect('', list(indices.keys()), placeholder='')
                     ticker = [indices[indice] for indice in escolha]
-                    legenda_dict = {v: k for k, v in indices.items()}  # Inverte o dicionário para a legenda
+                    legenda_dict = {v: k for k, v in indices.items()} 
 
                 elif opcao1 == 'Commodities':
                     escolha = st.multiselect('', list(commodities.keys()), placeholder='')

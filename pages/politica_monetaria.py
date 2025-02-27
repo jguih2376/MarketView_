@@ -11,6 +11,8 @@ def get_data():
     ipca = sgs.get({'IPCA': 13522}, start='2000-01-01')
     ipca_atual = ipca.iloc[-1].values[0]
     
+
+    
     juros_real = ()
     # Calcular juros real
     
@@ -126,58 +128,19 @@ def app():
         # Criando gráfico interativo do Dólar
         fig_dolar = go.Figure()
 
-        # Linha do dólar ao longo do tempo
-        fig_dolar.add_trace(go.Scatter(
-            x=dolar.index, 
-            y=dolar['Dólar'], 
-            mode='lines',
-            line=dict(width=1),
-            name="Cotação do Dólar"
-        ))
+        fig_dolar.add_trace(go.Scatter(x=dolar.index, y=dolar['Dólar'], mode='lines', line=dict(width=1), name="Cotação do Dólar"))
 
-        # Ponto final destacado
-        fig_dolar.add_trace(go.Scatter(
-            x=[dolar.index[-1]], 
-            y=[dolar_atual], 
-            mode='markers', 
-            marker=dict(color='red', size=5),
-            name="Última cotação"
-        ))
+        fig_dolar.add_trace(go.Scatter(x=[dolar.index[-1]], y=[dolar_atual], mode='markers', marker=dict(color='red', size=5), name="Última cotação"))
 
-        # Layout do gráfico
-        fig_dolar.update_layout(
-            title='Cotação do Dólar',
-            title_x=0.4,  # Centraliza melhor o título
-            yaxis_title='Valor em R$',
-            showlegend=False,
-            plot_bgcolor='rgba(211, 211, 211, 0.10)',  # Fundo mais claro para facilitar leitura
-            height=550,
-            # margin=dict(l=40, r=40, t=40, b=40)
-        )
-
-        # Ajustes nos eixos
-        fig_dolar.update_yaxes(
-            showgrid=True, 
-            gridwidth=0.1, 
-            gridcolor='gray',
-            griddash='dot', 
-            zeroline=False,  
-            range=[dolar['Dólar'].min() * 0.9, dolar['Dólar'].max() * 1.1],  # Ajuste dinâmico do eixo Y
-            tickformat='.2f'  # Formatação para duas casas decimais
-        )
+        fig_dolar.update_layout(title='Cotação do Dólar', title_x=0.4, yaxis_title='Valor em R$', showlegend=False, 
+                                plot_bgcolor='rgba(211, 211, 211, 0.10)', height=550)
+        
+        fig_dolar.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot', zeroline=False,
+                                range=[dolar['Dólar'].min() * 0.9, dolar['Dólar'].max() * 1.1], tickformat='.2f')
 
         fig_dolar.update_xaxes(showgrid=False, zeroline=False)
 
-        # Adicionando anotação para destacar o valor atual
-        fig_dolar.add_annotation(
-            x=dolar.index[-1], 
-            y=dolar_atual,
-            text=f'R${dolar_atual:.2f}',
-            showarrow=True,
-            arrowhead=0,
-            ax=20,
-            ay=-40,
-            #bgcolor='rgba(255, 255, 255, 0)',
-            bordercolor='yellow'
-        )
+        fig_dolar.add_annotation(x=dolar.index[-1], y=dolar_atual, text=f'R${dolar_atual:.2f}', showarrow=True,
+                                arrowhead=0, ax=20, ay=-40, bordercolor='yellow')
+        
         st.plotly_chart(fig_dolar)

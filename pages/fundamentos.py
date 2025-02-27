@@ -32,17 +32,14 @@ def app():
             papel1 = st.selectbox('Selecione o Papel', lista_tickers)
             st.session_state.papel1 = papel1
             info_papel1 = fd.get_detalhes_papel(papel1)
-            #st.write(info_papel1)
-            #st.write(info_papel1.columns)
+            
 
             st.write('**Empresa:**', info_papel1['Empresa'][0])
             st.write('**Setor:**', info_papel1['Setor'][0])
             st.write('**Subsetor:**', info_papel1['Subsetor'][0])
             st.write('**Valor de Mercado:**',f"R$ {float(info_papel1['Valor_de_mercado'][0]):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
             st.write('**Nº de ações:**', f"{float(info_papel1['Nro_Acoes'][0]):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
-
             st.write('')
-            
             st.caption(f"Últ. balanço processado: {pd.to_datetime(info_papel1['Ult_balanco_processado'][0]).strftime('%d/%m/%Y')}")
             st.caption('Dados Balanço Patrimonial')
             st.write('**Ativo:**',f"R$ {float(info_papel1['Ativo'][0]):,.2f}".replace(',', 'X').replace('.', ',').replace('X', '.'))
