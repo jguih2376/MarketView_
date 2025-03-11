@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 def app():
     st.title('📉 Análise Histórica')
-    tab1, tab2 = st.tabs(["Retorno", "Desempenho"])  
+    tab1, tab2 = st.tabs(["Heatmap", "Desempenho"])  
     with tab1:  
         st.subheader('Retorno Mensal')
         # Formulário principal

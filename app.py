@@ -24,7 +24,7 @@ if "page" not in st.session_state:
 # Barra lateral com navegação usando radio
 st.sidebar.title("Navegação")
 pagina = st.sidebar.radio(
-    "Escolha uma página", 
+    "Escolha uma página:", 
     ["Home", "Calendário Econômico", "Panorama do Mercado", "Análise Histórica", "Fundamentos", "Estatística Monetária"]
 )
 

@@ -98,26 +98,17 @@ def app():
         
         # Exibindo o iframe com alinhamento ajustado
         iframe_code = """
-        <iframe frameborder="0" scrolling="no" height="146" width="108" allowtransparency="true" marginwidth="0" marginheight="0" src="https://sslirates.investing.com/index.php?rows=1&bg1=FFFFFF&bg2=F1F5F8&text_color=333333&enable_border=show&border_color=0452A1&header_bg=ffffff&header_text=FFFFFF&force_lang=12" align="center"></iframe><br />
-        <table width="200">
-            <tbody>
-                <tr><td style="text-align:left">
-                    <a href="//www.investing.com" rel="nofollow" target="_blank">
-                        <img style="vertical-align:middle;" title="Investing.com" alt="Investing.com" border="0" src="https://92f8049275b46d631f32-c598b43a8fdedd4f0b9230706bd7ad18.ssl.cf1.rackcdn.com/forexpros_en_logo.png">
-                    </a>
-                </td></tr>
-                <tr><td>
-                    <span style="font-size: 11px;color: #333333;text-decoration: none;">
-                        Taxas de Juros fornecidas por 
-                        <a href="https://br.investing.com/" rel="nofollow" target="_blank" style="font-size: 11px;color: #06529D; font-weight: bold;" class="underline_link">Investing.com Brasil</a>.
-                    </span>
-                </td></tr>
-            </tbody>
-        </table>
+        <div style="text-align: center; padding: 1px; font-family: sans-serif;">
+            <span style="font-size: 20px; font-weight: bold; display: block; margin-bottom: 8px; color: white;">Mundo</span>
+            <div style="display: flex; justify-content: center;">
+                <iframe frameborder="0" scrolling="no" height="146" width="108" allowtransparency="true" marginwidth="0" marginheight="0" 
+                src="https://sslirates.investing.com/index.php?rows=1&bg1=FFFFFF&bg2=F1F5F8&text_color=333333&enable_border=hide&border_color=0452A1&
+                header_bg=ffffff&header_text=FFFFFF&force_lang=12"></iframe>
+            </div>
+        </div>
         """
 
-        # Usando st.components.v1.html para renderizar o código HTML com o iframe
-        st.components.html(iframe_code, height=200)    
+        st.components.v1.html(iframe_code, height=180)
 
         juros_real = (((1 + selic_atual/100) / (1 + ipca_atual/100)) - 1) * 100
 
