@@ -127,6 +127,7 @@ def app():
                     st.error("Erro ao buscar os dados. Verifique o ticker ou tente novamente mais tarde.")
 
 
+
     #"_______________________________________________________________________________________________________________________________________________________"
     with tab2:
         st.subheader("Desempenho Relativo dos Ativos")
