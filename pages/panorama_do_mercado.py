@@ -20,7 +20,8 @@ def app():
         <div class="tradingview-widget-copyright"><a href="https://br.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Monitore todos os mercados no TradingView</span></a></div>
         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
         {
-        "autosize": true,
+        "width": "980",
+        "height": "610",
         "symbol": "BMFBOVESPA:IBOV",
         "timezone": "America/Sao_Paulo",
         "theme": "light",
