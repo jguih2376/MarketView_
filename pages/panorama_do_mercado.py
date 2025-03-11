@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 def app():
     st.title("🌎 Panorama do Mercado")
@@ -11,9 +12,6 @@ def app():
 
     with tab2: 
         st.write('TradingView')
-        import streamlit as st
-        import streamlit.components.v1 as components
-
         # HTML com o widget do TradingView
         tradingview_html = """
         <!-- TradingView Widget BEGIN -->
