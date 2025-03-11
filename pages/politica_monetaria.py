@@ -117,7 +117,7 @@ def app():
         """
 
         # Usando st.components.v1.html para renderizar o código HTML com o iframe
-        components.html(iframe_code, height=200)    
+        st.components.html(iframe_code, height=200)    
 
         juros_real = (((1 + selic_atual/100) / (1 + ipca_atual/100)) - 1) * 100
 
