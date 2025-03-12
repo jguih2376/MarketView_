@@ -126,9 +126,6 @@ def app():
             </style>
             """, unsafe_allow_html=True)
 
-        # Título principal
-        st.markdown('<p class="main-title">Panorama de Mercado</p>', unsafe_allow_html=True)
-
         # Atualização automática da página a cada 10 segundos
         st_autorefresh(interval=10000, key="marketrefresh")
 
@@ -258,19 +255,28 @@ def app():
                     cols = st.columns(min(4, len(currency_data)))
                     for idx, (index, row) in enumerate(currency_data.iterrows()):
                         with cols[idx % len(cols)]:
-                            var_class = "positive" if float(row["Variação (%)"]) >= 0 else "negative"
+                            # Definir cor da variação e fundo dinâmicos
+                            var_color = "#155724" if float(row["Variação (%)"]) >= 0 else "#721c24"  # Verde para positivo, vermelho para negativo
+                            bg_color = "#d4edda" if float(row["Variação (%)"]) >= 0 else "#f8d7da"  # Fundo verde ou vermelho
                             arrow = "↑" if float(row["Variação (%)"]) >= 0 else "↓"
                             st.markdown(
                                 f"""
-                                <div class="card">
-                                    <div class="tooltip">
-                                        <div class="card-title">{row['Par']}</div>
-                                        <span class="tooltiptext">Cotação em {row['Par'].split('/')[1]}</span>
-                                    </div>
-                                    <div class="card-value">{row['Cotação']:.4f}</div>
-                                    <div class="card-variation {var_class}">{row['Variação (%)']:.2f}% {arrow}</div>
+                                <div style="
+                                    background-color: {bg_color}; 
+                                    padding: 12px; 
+                                    border-radius: 8px; 
+                                    margin: 8px 0; 
+                                    box-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+                                    display: flex; 
+                                    justify-content: space-between; 
+                                    align-items: center;">
+                                    <span style="font-weight: bold; font-size: 14px; color: black; flex: 1; text-align: left;">{row['Par']}</span>
+                                    <span style="font-size: 12px; color: black; flex: 1; text-align: center;">{row['Cotação']:.4f}</span>
+                                    <span style="font-size: 14px; color: {var_color}; font-weight: bold; flex: 1; text-align: right;">{arrow} {abs(row['Variação (%)']):.2f}%</span>
                                 </div>
-                                """, unsafe_allow_html=True)
+                                """, 
+                                unsafe_allow_html=True
+                            )
 
                 st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
 
