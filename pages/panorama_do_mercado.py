@@ -132,8 +132,6 @@ def app():
         # Ajustar para o fuso horário UTC-3
         br_tz = pytz.timezone('America/Sao_Paulo')
         br_time = datetime.now(br_tz)
-        # Timestamp
-        st.markdown(f'<p class="timestamp">Última atualização: {br_time.strftime("%d/%m/%Y %H:%M:%S")}</p>', unsafe_allow_html=True)
 
         # Funções de dados (com cache ajustado)
         @st.cache_data(ttl=10)  # Moedas: 10 segundos
@@ -558,6 +556,8 @@ def app():
 
 
 
+        # Timestamp
+        st.markdown(f'<p class="timestamp">Última atualização: {br_time.strftime("%d/%m/%Y %H:%M:%S")}</p>', unsafe_allow_html=True)
 
         # Rodapé
         st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
