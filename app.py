@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="MarketView",  # Título que aparecerá na aba do navegador
     page_icon="📈",           # Ícone na aba do navegador
     layout="wide",             # Layout em tela cheia
-    initial_sidebar_state="collapsed")
+)#initial_sidebar_state="collapsed")
 
 from pages import home, calendario_economico, panorama_do_mercado, retorno_mensal, politica_monetaria, fundamentos
 

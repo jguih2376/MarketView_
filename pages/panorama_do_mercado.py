@@ -119,10 +119,7 @@ def app():
                 visibility: visible;
                 opacity: 1;
             }
-            body, .stApp {
-                background-color: #1E1E1E;
-                color: #FFFFFF;
-            }
+
             </style>
             """, unsafe_allow_html=True)
 
