@@ -695,7 +695,7 @@ def app():
                             y=daily_data['Close'],
                             mode='lines',
                             name="Fechamento",
-                            line=dict(color='white', width=1)
+                            line=dict(color='#00ccff', width=1)
                         ))
                     fig_daily.update_layout(
                         title="Diário",
@@ -746,7 +746,7 @@ def app():
                                 y=weekly_data['Close'],
                                 mode='lines',
                                 name="Fechamento",
-                                line=dict(width=1)
+                                line=dict(color='#00ccff',width=1)
                             ))
                         fig_weekly.update_layout(
                             title="Semanal",
@@ -795,7 +795,7 @@ def app():
                                 y=yearly_data['Close'],
                                 mode='lines',
                                 name="Fechamento",
-                                line=dict(width=1)
+                                line=dict(color='#00ccff',width=1)
                             ))
                         last_5_years = yearly_data.index[-60:]  # 5 anos * 12 meses
                         fig_yearly.update_layout(
