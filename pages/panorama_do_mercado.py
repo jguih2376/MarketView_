@@ -8,7 +8,7 @@ from streamlit_autorefresh import st_autorefresh
 from datetime import datetime
 import plotly.graph_objects as go
 
-st.set_page_config(page_title="Panorama de Mercado", layout="wide", initial_sidebar_state="collapsed")
+#st.set_page_config(page_title="Panorama de Mercado", layout="wide", initial_sidebar_state="collapsed")
 
 def app():
     st.title("🌎 Panorama do Mercado")

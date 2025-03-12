@@ -5,8 +5,9 @@ from pages import home, calendario_economico, panorama_do_mercado, retorno_mensa
 st.set_page_config(
     page_title="MarketView",  # Título que aparecerá na aba do navegador
     page_icon="📈",           # Ícone na aba do navegador
-    layout="wide"             # Layout em tela cheia
-)
+    layout="wide",             # Layout em tela cheia
+    initial_sidebar_state="collapsed")
+
 # CSS para esconder todos os nomes da barra lateral
 st.markdown("""
     <style>
