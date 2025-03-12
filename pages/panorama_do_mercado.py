@@ -119,9 +119,16 @@ def app():
                 visibility: visible;
                 opacity: 1;
             }
-
+            /* body, .stApp {
+            background-color: #1E1E1E;
+            color: #FFFFFF;
+            } /*
             </style>
             """, unsafe_allow_html=True)
+            #body, .stApp {
+            #background-color: #1E1E1E;
+            #color: #FFFFFF;
+            #}
 
         # Atualização automática da página a cada 10 segundos
         st_autorefresh(interval=10000, key="marketrefresh")
@@ -688,7 +695,7 @@ def app():
                             y=daily_data['Close'],
                             mode='lines',
                             name="Fechamento",
-                            line=dict(color='royalblue', width=1)
+                            line=dict(width=1)
                         ))
                     fig_daily.update_layout(
                         title="Diário",
@@ -739,7 +746,7 @@ def app():
                                 y=weekly_data['Close'],
                                 mode='lines',
                                 name="Fechamento",
-                                line=dict(color='royalblue', width=1)
+                                line=dict(width=1)
                             ))
                         fig_weekly.update_layout(
                             title="Semanal",
@@ -788,7 +795,7 @@ def app():
                                 y=yearly_data['Close'],
                                 mode='lines',
                                 name="Fechamento",
-                                line=dict(color='royalblue', width=1)
+                                line=dict(width=1)
                             ))
                         last_5_years = yearly_data.index[-60:]  # 5 anos * 12 meses
                         fig_yearly.update_layout(
