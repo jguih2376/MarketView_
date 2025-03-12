@@ -1,5 +1,4 @@
 import streamlit as st
-from pages import home, calendario_economico, panorama_do_mercado, retorno_mensal, politica_monetaria, fundamentos
 
 # Configuração global do Streamlit
 st.set_page_config(
@@ -7,6 +6,8 @@ st.set_page_config(
     page_icon="📈",           # Ícone na aba do navegador
     layout="wide",             # Layout em tela cheia
     initial_sidebar_state="collapsed")
+
+from pages import home, calendario_economico, panorama_do_mercado, retorno_mensal, politica_monetaria, fundamentos
 
 # CSS para esconder todos os nomes da barra lateral
 st.markdown("""
