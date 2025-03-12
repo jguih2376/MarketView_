@@ -252,7 +252,7 @@ def app():
                 st.markdown('<p class="subheader">💱 Moedas</p>', unsafe_allow_html=True)
                 currency_data = get_currency_rates()
                 if not currency_data.empty:
-                    cols = st.columns(min(4, len(currency_data)))
+                    cols = st.columns(min(3, len(currency_data)))
                     for idx, (index, row) in enumerate(currency_data.iterrows()):
                         with cols[idx % len(cols)]:
                             var_color = "#155724" if float(row["Variação (%)"]) >= 0 else "#721c24"
@@ -282,7 +282,7 @@ def app():
                 st.markdown('<p class="subheader">📈 Índices</p>', unsafe_allow_html=True)
                 stocks_data = get_stocks()
                 if not stocks_data.empty:
-                    cols = st.columns(min(4, len(stocks_data)))
+                    cols = st.columns(min(3, len(stocks_data)))
                     for idx, (index, row) in enumerate(stocks_data.iterrows()):
                         with cols[idx % len(cols)]:
                             var_value = float(str(row["Variação (%)"]).replace("N/A", "0"))
@@ -313,7 +313,7 @@ def app():
                 st.markdown('<p class="subheader">⛽ Commodities</p>', unsafe_allow_html=True)
                 commodities_data = get_commodities()
                 if not commodities_data.empty:
-                    cols = st.columns(min(4, len(commodities_data) // 2 + 1))
+                    cols = st.columns(min(3, len(commodities_data) // 2 + 1))
                     for idx, (index, row) in enumerate(commodities_data.iterrows()):
                         with cols[idx % len(cols)]:
                             var_value = float(str(row["Variação (%)"]).replace("N/A", "0"))
