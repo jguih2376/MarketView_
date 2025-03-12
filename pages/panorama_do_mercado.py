@@ -8,6 +8,7 @@ from streamlit_autorefresh import st_autorefresh
 from datetime import datetime
 import plotly.graph_objects as go
 
+st.set_page_config(page_title="Panorama de Mercado", layout="wide", initial_sidebar_state="collapsed")
 
 def app():
     st.title("🌎 Panorama do Mercado")
@@ -18,7 +19,6 @@ def app():
     with tab1: #Panorama
 
         # Configuração da página com tema escuro
-        st.set_page_config(page_title="Panorama de Mercado", layout="wide", initial_sidebar_state="collapsed")
         # No CSS geral (substitua a seção correspondente no início do código):
         st.markdown("""
             <style>
