@@ -695,7 +695,7 @@ def app():
                             y=daily_data['Close'],
                             mode='lines',
                             name="Fechamento",
-                            line=dict(width=1)
+                            line=dict(color='white', width=1)
                         ))
                     fig_daily.update_layout(
                         title="Diário",
