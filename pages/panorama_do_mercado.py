@@ -226,13 +226,14 @@ def app():
             ]
             
             tickers = [acao + '.SA' for acao in acoes]
-            data = yf.download(tickers, period="1d", interval="1d")["Close"]
-            open_data = yf.download(tickers, period="1d", interval="1d")["Open"]
+            data = yf.download(tickers, period="2d", interval="1d")["Close"]
+            #open_data = yf.download(tickers, period="1d", interval="1d")["Open"]
             
-            if data.empty or open_data.empty:
-                raise ValueError("Dados insuficientes para calcular a variação do dia.")
+            if data.shape[0] < 2:
+                raise ValueError("Dados insuficientes para calcular a variação em relação ao dia anterior.")
             
-            variacao = ((data.iloc[-1] - open_data.iloc[-1]) / open_data.iloc[-1]) * 100
+
+            variacao = ((data.iloc[-1] - data.iloc[0]) / data.iloc[0]) * 100
             return pd.DataFrame({
                 "Ação": [ticker[:-3] for ticker in tickers], 
                 "Variação (%)": variacao.values,
@@ -349,7 +350,7 @@ def app():
             with st.expander('...', expanded=True):
                 try:
                     # Dados intraday (5 minutos)
-                    intraday_data = get_stock_data('^BVSP', period="1d", interval="1m")
+                    intraday_data = get_stock_data('^BVSP', period="1d", interval="3m")
                     # Dados do dia anterior para fechamento e diário
                     previous_day_data = get_stock_data('^BVSP', period="2d", interval="1d")
                     # Dados semanal (5 dias úteis)
