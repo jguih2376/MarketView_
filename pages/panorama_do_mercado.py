@@ -755,7 +755,7 @@ def app():
                             yaxis_side="right",
                             template="plotly_dark",
                             height=450,
-                            margin=dict(l=40, r=40, t=60, b=40),  # Margens ajustadas
+                            #margin=dict(l=40, r=40, t=60, b=40),  # Margens ajustadas
                             dragmode='pan',
                             xaxis=dict(
                                 rangeslider=dict(visible=True, thickness=0.03),
