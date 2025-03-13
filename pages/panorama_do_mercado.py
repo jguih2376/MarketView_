@@ -350,7 +350,7 @@ def app():
             with st.expander('...', expanded=True):
                 try:
                     # Dados intraday (5 minutos)
-                    intraday_data = get_stock_data('^BVSP', period="1d", interval="3m")
+                    intraday_data = get_stock_data('^BVSP', period="1d", interval="2m")
                     # Dados do dia anterior para fechamento e diário
                     previous_day_data = get_stock_data('^BVSP', period="2d", interval="1d")
                     # Dados semanal (5 dias úteis)
