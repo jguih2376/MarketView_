@@ -132,7 +132,7 @@ def app():
     with tab2:
         st.subheader("Desempenho Relativo dos Ativos")
 
-        # Função para carregar os dados usando yfinance
+      
         @st.cache_data(ttl=600)  
         def carregar_dados(tickers, data_inicio, data_fim):
             if not tickers:

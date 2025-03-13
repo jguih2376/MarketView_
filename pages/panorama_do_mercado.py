@@ -130,14 +130,14 @@ def app():
             #color: #FFFFFF;
             #}
 
-        # Atualização automática da página a cada 10 segundos
         st_autorefresh(interval=10000, key="marketrefresh")
 
         # Ajustar para o fuso horário UTC-3
         br_tz = pytz.timezone('America/Sao_Paulo')
         br_time = datetime.now(br_tz)
+       
 
-        # Funções de dados (com cache ajustado)
+
         @st.cache_data(ttl=10)  # Moedas: 10 segundos
         def get_currency_rates():
             try:
@@ -349,7 +349,7 @@ def app():
             with st.expander('...', expanded=True):
                 try:
                     # Dados intraday (5 minutos)
-                    intraday_data = get_stock_data('^BVSP', period="1d", interval="5m")
+                    intraday_data = get_stock_data('^BVSP', period="1d", interval="1m")
                     # Dados do dia anterior para fechamento e diário
                     previous_day_data = get_stock_data('^BVSP', period="2d", interval="1d")
                     # Dados semanal (5 dias úteis)
