@@ -353,7 +353,7 @@ def app():
                     # Dados do dia anterior para fechamento e diário
                     previous_day_data = get_stock_data('^BVSP', period="2d", interval="1d")
                     # Dados semanal (5 dias úteis)
-                    weekly_data = get_stock_data('^BVSP', period="5d", interval="1d")
+                    weekly_data = get_stock_data('^BVSP', period="1wk", interval="1d")
                     # Dados mensal (1 mês)
                     monthly_data = get_stock_data('^BVSP', period="1mo", interval="1d")
                     
