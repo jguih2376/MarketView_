@@ -215,7 +215,7 @@ def app():
         @st.cache_data(ttl=1200)  # Ações do IBOV: 20 minutos
         def get_ibov_data():
             acoes = [
-                'ALOS3', 'ABEV3', 'ASAI3', 'AURE3', 'AMOB3', 'AZUL4', 'AZZA3', 'B3SA3', 'BBSE3', 'BBDC3', 'BBDC4', 
+                'ALOS3', 'ABEV3', 'ASAI3', 'AURE3', 'AZUL4', 'AZZA3', 'B3SA3', 'BBSE3', 'BBDC3', 'BBDC4', 
                 'BRAP4', 'BBAS3', 'BRKM5', 'BRAV3', 'BRFS3', 'BPAC11', 'CXSE3', 'CRFB3', 'CCRO3', 'CMIG4', 'COGN3', 
                 'CPLE6', 'CSAN3', 'CPFE3', 'CMIN3', 'CVCB3', 'CYRE3', 'ELET3', 'ELET6', 'EMBR3', 'ENGI11', 'ENEV3', 
                 'EGIE3', 'EQTL3', 'FLRY3', 'GGBR4', 'GOAU4', 'NTCO3', 'HAPV3', 'HYPE3', 'IGTI11', 'IRBR3', 'ISAE4', 
@@ -235,7 +235,8 @@ def app():
 
             variacao = ((data.iloc[-1] - data.iloc[0]) / data.iloc[0]) * 100
             return pd.DataFrame({
-                "Ação": [ticker[:-3] for ticker in tickers], 
+                "Ação": [col[:-3] for col in data.columns],
+                #"Ação": [ticker[:-3] for ticker in tickers], 
                 "Variação (%)": variacao.values,
                 "Último Preço": data.iloc[-1].values
             })
