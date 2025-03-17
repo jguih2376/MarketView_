@@ -8,7 +8,6 @@ from streamlit_autorefresh import st_autorefresh
 from datetime import datetime
 import plotly.graph_objects as go
 
-#st.set_page_config(page_title="Panorama de Mercado", layout="wide", initial_sidebar_state="collapsed")
 
 def app():
     st.title("🌎 Panorama do Mercado")
@@ -166,6 +165,7 @@ def app():
                 st.error(f"Erro ao carregar moedas: {e}")
                 return pd.DataFrame()
 
+
         @st.cache_data(ttl=1200)  # Commodities: 20 minutos
         def get_commodities():
             symbols = {
@@ -191,6 +191,7 @@ def app():
             return pd.DataFrame([(k, v["Preço"], v["Variação (%)"]) for k, v in data.items()],
                                 columns=["Commodity", "Preço", "Variação (%)"])
 
+
         @st.cache_data(ttl=1200)  # Índices: 20 minutos
         def get_stocks():
             symbols = {'IBOV': '^BVSP', 'EWZ': 'EWZ', 'S&P500': '^GSPC', 'NASDAQ': '^IXIC', 'FTSE100': '^FTSE', 
@@ -211,6 +212,7 @@ def app():
                     data[name] = {"Preço": "N/A", "Variação (%)": "N/A"}
             return pd.DataFrame([(k, v["Preço"], v["Variação (%)"]) for k, v in data.items()],
                                 columns=["Índice", "Preço", "Variação (%)"])
+
 
         @st.cache_data(ttl=1200)  # Ações do IBOV: 20 minutos
         def get_ibov_data():
@@ -240,6 +242,7 @@ def app():
                 "Variação (%)": variacao.values,
                 "Último Preço": data.iloc[-1].values
             })
+
 
         @st.cache_data(ttl=1200)  # Dados do IBOV: 20 minutos
         def get_stock_data(ticker, period, interval):
