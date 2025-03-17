@@ -27,19 +27,18 @@ def create_chart(data, atual, title, yaxis_title, unit):
 
 
 
-
 def app():
     st.title("🏛️Estatística Monetária")
-
-    # Obtendo dados com cache
-    selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
-
+    with st.spinner("Carregando dados..."):
+        selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
+        
     col1, col2 = st.columns([5, 1])
     with col1:
         st.plotly_chart(create_chart(selic, selic_atual, 'Taxa de Juros SELIC', 'Taxa de Juros (%)', '%'))
         st.plotly_chart(create_chart(ipca, ipca_atual, 'IPCA Acumulado 12M', 'IPCA acumulado (%)', '%'))
         st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
 
+        
     with col2:
         st.write('')
         st.write('')
