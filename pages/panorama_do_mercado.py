@@ -129,7 +129,7 @@ def app():
             #color: #FFFFFF;
             #}
 
-        st_autorefresh(interval=10000, key="marketrefresh")
+        st_autorefresh(interval=300000, key="marketrefresh")
 
         # Ajustar para o fuso horário UTC-3
         br_tz = pytz.timezone('America/Sao_Paulo')
@@ -137,7 +137,7 @@ def app():
        
 
 
-        @st.cache_data(ttl=10)  # Moedas: 10 segundos
+        @st.cache_data(ttl=300)  # Moedas: 50 minutos
         def get_currency_rates():
             try:
                 pairs = ["USD-BRL", "EUR-USD", "USD-JPY", "USD-GBP", "USD-CAD", "USD-SEK", "USD-CHF"]
@@ -573,7 +573,7 @@ def app():
         st.markdown("""
         <div style="text-align: center; font-size: 12px; color: #A9A9A9; margin-top: 20px;">
             <strong>Fonte:</strong> Moedas: AwesomeAPI | Commodities, Índices e Ações: Yahoo Finance<br>
-            <strong>Nota:</strong> Moedas atualizadas a cada 10 segundos; demais cotações a cada 20 minutos.
+            <strong>Nota:</strong> Moedas atualizadas a cada 5 minutos; demais cotações a cada 20 minutos.
         </div>
         """, unsafe_allow_html=True)
 
