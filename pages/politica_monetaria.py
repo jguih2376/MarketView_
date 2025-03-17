@@ -24,7 +24,7 @@ def create_chart(data, atual, title, yaxis_title, unit):
     fig.update_layout(title=title, yaxis_title=yaxis_title, showlegend=False, height=400)
     fig.add_annotation(x=data.index[-1], y=atual, text=f'{atual:.2f}{unit}', showarrow=True,ax=20, ay=-40,bordercolor='yellow')
    
-
+    return fig
 
 
 def app():
