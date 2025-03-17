@@ -38,7 +38,7 @@ def app():
         st.plotly_chart(create_chart(ipca, ipca_atual, 'IPCA Acumulado 12M', 'IPCA acumulado (%)', '%'))
         st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
 
-        
+
     with col2:
         st.write('')
         st.write('')
