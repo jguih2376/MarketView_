@@ -64,14 +64,19 @@ def app():
         
 
         # Exibir o resultado com alinhamento centralizado
-        st.write(
+        st.markdown(
             f"""
-            <div style="text-align: center; color: white;">
-                <h5>Juros Real:</h5>
-                <span style="font-size: 35px; font-weight: normal;">{juros_real:.2f}%</span>
+            <div style="
+                background-color: #ffffff; 
+                padding: 12px; 
+                border-radius: 8px; 
+                margin: 8px 0; 
+                box-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+                text-align: center;">
+                <span style="font-weight: bold; font-size: 14px; color: black; display: block; margin-bottom: 8px;">Juros Real</span>
+                <span style="font-size: 35px; color: black; font-weight: normal;">{juros_real:.2f}%</span>
             </div>
             """, 
             unsafe_allow_html=True
 )
-
 
