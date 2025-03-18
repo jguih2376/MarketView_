@@ -571,7 +571,7 @@ def app():
         # Rodapé
         st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
         st.markdown("""
-        <div style="text-align: center; font-size: 12px; color: #A9A9A9; margin-top: 20px;">
+        <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
             <strong>Fonte:</strong> Moedas: AwesomeAPI | Commodities, Índices e Ações: Yahoo Finance<br>
             <strong>Nota:</strong> Moedas atualizadas a cada 5 minutos; demais cotações a cada 20 minutos.
         </div>
@@ -667,7 +667,7 @@ def app():
                 elif opcao == 'Ações':
                     acoes = ["PETR4", "VALE3", "ITUB4", "BBAS3", "BBDC4", "RAIZ4", "PRIO3", "VBBR3", "CSAN3", "UGPA3", "BPAC11", "SANB11",
                             "GGBR4", "CSNA3", "USIM5", "JBSS3", "ABEV3", "MRFG3", "BRFS3", "BEEF3", "ELET3", "NEOE3", "CPFE3", "ENGI11",
-                            "EQTL3", "SUZB3", "KLBN11", "DTEX3", "RANI3", "MRFG3", "CYRE3", "MRVE3", "EZTC3", "CVCB3", "TRIS3", "WEGE3", "B3SA3"]
+                            "EQTL3", "SUZB3", "KLBN11", "DTEX3", "RANI3", "MRFG3", "CYRE3", "MRVE3", "EZTC3", "CVCB3", "TRIS3", "WEGE3", "B3SA3",'EMBR3']
                     acoes_dict = {acao: acao + '.SA' for acao in acoes}
                     escolha = st.selectbox('Escolha a ação:', list(acoes_dict.keys()))
                     ticker = acoes_dict[escolha]

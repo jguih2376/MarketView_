@@ -28,3 +28,11 @@ def app():
     
     # Renderizando o HTML no Streamlit
     components.html(iframe_code, height=700)
+
+
+    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+        <strong>Fonte:</strong> Investing.com<br>
+    </div>
+    """, unsafe_allow_html=True)

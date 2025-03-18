@@ -1,10 +1,13 @@
 import streamlit as st
 import plotly.graph_objects as go
 from bcb import sgs
+from datetime import datetime
+import pandas as pd
+
 
 @st.cache_data
 def get_data():
-    start_date = '2005-01-01'  # Reduzindo o período
+    start_date = '2010-01-01' 
     dolar = sgs.get({'Dólar': 10813}, start=start_date)
     selic = sgs.get({'Selic': 432}, start=start_date)
     ipca = sgs.get({'IPCA': 13522}, start=start_date)
@@ -21,13 +24,42 @@ def create_chart(data, atual, title, yaxis_title, unit):
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=data.index, y=data.iloc[:, 0], mode='lines'))
     fig.add_trace(go.Scatter(x=[data.index[-1]], y=[atual], mode='markers', marker=dict(color='red', size=5)))
-    fig.update_layout(title=title, yaxis_title=yaxis_title, showlegend=False, height=400)
-    fig.add_annotation(x=data.index[-1], y=atual, text=f'{atual:.2f}{unit}', showarrow=True,ax=20, ay=-40,bordercolor='yellow')
+    fig.update_layout(title=title, yaxis_title=yaxis_title, showlegend=False,                           
+                                yaxis=dict(
+                                side="right",
+                                gridcolor='rgba(255, 255, 255, 0.1)',  
+                                zeroline=False,
+                                color='#FFFFFF'),
+
+                                xaxis=dict(                                
+                                gridcolor='rgba(255, 255, 255, 0.1)',  
+                                zeroline=False,
+                                color='#FFFFFF'
+                            ),
+                                height=450)
+    fig.add_annotation(
+                            x=1,  
+                            y=atual,  
+                            xref="paper", 
+                            yref="y",
+                            text=f"{atual:.2f}",  
+                            showarrow=True,
+                            arrowhead=0,
+                            ax=5,  
+                            ay=0,  
+                            font=dict(size=12, color='#FFFFFF'),
+                            bgcolor='rgba(0, 0, 0, 0.5)',  
+                            bordercolor='#FFFFFF',
+                            borderwidth=1,
+                            xanchor="left",  
+                            yanchor="middle"  
+                            )
    
     return fig
 
 
-def app():
+tab1, tab2 = st.tabs(['Historico','Tabelas'])
+with tab1:
     st.title("🏛️Estatística Monetária")
     with st.spinner("Carregando dados..."):
         selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
@@ -40,8 +72,7 @@ def app():
 
 
     with col2:
-        # Exibindo o iframe com alinhamento ajustado
-        st.markdown("<br><br><br>", unsafe_allow_html=True)  # Spacing above the box
+        st.markdown("<br><br><br>", unsafe_allow_html=True)  
         combined_code = f"""
             <div style="
                 background-color: #ffffff; 
@@ -62,8 +93,72 @@ def app():
                     header_bg=ffffff&header_text=FFFFFF&force_lang=12"></iframe>
                 </div>
                 <!-- Juros Real Section -->
-                <span style="font-weight: bold; font-size: 14px; color: black; display: block; margin-bottom: 8px;">🇧🇷 Juros Real</span>
+                <span style="font-weight: bold; font-size: 14px; color: black; display: block; margin-bottom: 8px;">Juros Real 🇧🇷</span>
                 <span style="font-size: 20px; color: black; font-weight: normal;">{juros_real:.2f}%</span>
             </div>
             """
         st.components.v1.html(combined_code, height=350)
+
+with tab2:
+    indicadores = {
+        "IPCA Mensal": 433,
+        "IGP-M Mensal": 189,
+        "Taxa SELIC": 432
+    }
+
+    st.title("Indicadores Econômicos - Banco Central")
+
+    indicador_selecionado = st.radio("Escolha o indicador:", list(indicadores.keys()))
+
+    start_date = st.date_input("Data de início", pd.to_datetime("2020-01-01").date(), format="DD/MM/YYYY", key="start_date")
+    end_date = st.date_input("Data de término", pd.to_datetime("today").date(), format="DD/MM/YYYY", key="end_date")
+
+    # Coletando dados
+    @st.cache_data(ttl=3600)
+    def fetch_bcb_data(codigo, start_date, end_date):
+        try:
+            dados = sgs.get(codigo, start=start_date, end=end_date)
+
+            if dados.empty:
+                return None
+
+            dados.columns = [f"{indicador_selecionado} (%)"]
+            dados.index.name = "Data"
+
+            dados = dados.sort_index(ascending=False)
+            dados.index = dados.index.strftime("%d/%m/%Y") 
+
+            return dados
+        except Exception:
+            return None
+
+    codigo_indicador = indicadores[indicador_selecionado]
+    dados = fetch_bcb_data(codigo_indicador, start_date, end_date)
+
+    if dados is not None:
+        st.subheader(f"Tabela de Dados - {indicador_selecionado}")
+        st.dataframe(dados)
+
+        #CSV
+        csv = dados.to_csv(index=True)
+        st.download_button(
+            label="Baixar dados como CSV",
+            data=csv,
+            file_name=f"{indicador_selecionado.lower().replace(' ', '_')}.csv",
+            mime="text/csv",
+        )
+    else:
+        st.warning(f"Nenhum dado encontrado para {indicador_selecionado} no período selecionado.")
+
+    # Informações adicionais
+    st.write(f"Dados obtidos do Banco Central do Brasil (SGS) - Indicador: {indicador_selecionado}")
+    st.write(f"Período selecionado: {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}")
+
+
+    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+        <strong>Fonte:</strong> BCB - Banco Central do Brasil<br>
+     
+    </div>
+    """, unsafe_allow_html=True)

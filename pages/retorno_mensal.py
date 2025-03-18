@@ -284,3 +284,10 @@ def app():
                 else:
                     st.warning("Nenhum dado disponível para os tickers selecionados.")
 
+    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+        <strong>Fonte:</strong> Moedas: AwesomeAPI | Commodities, Índices e Ações: Yahoo Finance<br>
+        <strong>Nota:</strong> Moedas atualizadas a cada 5 minutos; demais cotações a cada 20 minutos.
+    </div>
+    """, unsafe_allow_html=True)

@@ -5,12 +5,11 @@ import fundamentus as fd
 import plotly.graph_objects as go
 
 
-# Função para obter detalhes do papel com cache
 @st.cache_data
 def get_detalhes_papel(papel):
     return fd.get_detalhes_papel(papel)
 
-# Função principal do app
+
 def app():
     st.title('📑 Dados Fundamentalistas')
 
@@ -22,7 +21,6 @@ def app():
                  'MRVE3', 'MULT3', 'PCAR3', 'PETR3',  'RECV3', 'PRIO3', 'PETZ3', 'PSSA3', 'RADL3', 'RAIZ4', 
                  'RDOR3', 'RAIL3', 'SBSP3', 'SANB11', 'STBP3', 'SMTO3', 'CSNA3', 'SLCE3', 'SUZB3', 'TAEE11', 'VIVT3', 
                  'TIMS3', 'TOTS3', 'UGPA3', 'USIM5', 'VAMO3', 'VBBR3', 'VIVA3', 'WEGE3', 'YDUQ3']
-    #st.write(lista_tickers)
 
     comparar = st.checkbox('Comparar 2 ativos')
     col1, col2  = st.columns(2)
@@ -117,42 +115,34 @@ def app():
 
    
 
-    # Título do app para gráfico
+
     st.subheader('Evolução histórica')
 
-    # Opção para incluir IBOVESPA
     incluir_ibov = st.checkbox('Incluir IBOVESPA (IBOV)')
 
-    # Use os mesmos ativos da selectbox para a construção do gráfico
     ativos = [papel1 + '.SA']
     if comparar:
         ativos.append(papel2 + '.SA')
 
-    # Adicionar IBOVESPA à lista de comparação se a opção estiver ativada
     if incluir_ibov:
         ativos.append('^BVSP')
 
-    # Entrada de datas
     col3, col4, col00, col01 = st.columns(4)
     with col3:
         inicio = st.date_input('Data de Início', value=pd.to_datetime('2010-01-01'), format="DD/MM/YYYY")
     with col4:
         fim = st.date_input('Data de Fim', value='today', format="DD/MM/YYYY")
 
-    # Baixar os dados e gerar o gráfico quando o botão for pressionado
+
     if st.button('Gerar gráfico'):
         try:
-            # Baixar os dados históricos
             dados = yf.download(ativos, start=inicio, end=fim)['Close']
 
-            # Verificar se os dados foram baixados corretamente
             if dados.empty:
                 st.error(f'Nenhum dado foi encontrado para os ativos: {ativos} no intervalo de datas selecionado.')
             else:
-                # Calcular a variação percentual acumulada
                 dados_pct_acumulado = (dados / dados.iloc[0] - 1) * 100
 
-                # Criando gráfico interativo com Plotly
                 fig = go.Figure()
 
                 for ativo in ativos:
@@ -161,21 +151,19 @@ def app():
                             x=dados_pct_acumulado.index,
                             y=dados_pct_acumulado[ativo],
                             mode='lines',
-                            name=str(ativo),  # Garante que a legenda use a chave como nome
-                            line=dict(width=1)  # Linha fina
+                            name=str(ativo),  
+                            line=dict(width=1)  
                         ))
 
-                        # Adicionando bolinha no último ponto
                         fig.add_trace(go.Scatter(
-                            x=[dados_pct_acumulado.index[-1]],  # Último ponto do gráfico
-                            y=[dados_pct_acumulado[ativo].iloc[-1]],  # Último valor
+                            x=[dados_pct_acumulado.index[-1]],  
+                            y=[dados_pct_acumulado[ativo].iloc[-1]],  
                             mode='markers',
                             marker=dict(size=5, color='red', symbol='circle'),
-                            name=str(ativo),  # Usa a chave do ativo como legenda
-                            showlegend=False  # Evita duplicação na legenda
+                            name=str(ativo), 
+                            showlegend=False 
                         ))
 
-                        # Adicionando anotação para destacar o valor atual de cada ativo
                         fig.add_annotation(
                             x=dados_pct_acumulado.index[-1], 
                             y=dados_pct_acumulado[ativo].iloc[-1], 
@@ -187,19 +175,18 @@ def app():
                             bordercolor='yellow'
                         )
 
-                # Ajustando a aparência do gráfico
                 fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
                 fig.update_layout(
                     title='Histórico de Variação Percentual Acumulada dos Preços de Ativos',
                     yaxis=dict(title='Variação Percentual Acumulada (%)', side='left'),
                     legend_title='Ativos',
-                    plot_bgcolor='rgba(211, 211, 211, 0.10)',  # Cor de fundo cinza claro
+                    plot_bgcolor='rgba(211, 211, 211, 0.10)', 
                     xaxis=dict(showgrid=False),
                     height=600,
                     legend=dict(
-                        orientation='h',  # Coloca a legenda de forma horizontal
-                        y=-0.2,  # Define a posição vertical abaixo do gráfico
-                        yanchor='bottom',  # Anexa a legenda na parte inferior
+                        orientation='h', 
+                        y=-0.2,  
+                        yanchor='bottom',  
                     )
                 )
 
@@ -208,6 +195,14 @@ def app():
 
         except Exception as e:
             st.error(f'Ocorreu um erro: {e}')
+
+    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+        <strong>Fonte:</strong> Fundamentus - Invista Consciente<br>
+     
+    </div>
+    """, unsafe_allow_html=True)
 
 
 
