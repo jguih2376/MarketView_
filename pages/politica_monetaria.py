@@ -57,108 +57,108 @@ def create_chart(data, atual, title, yaxis_title, unit):
    
     return fig
 
+def app():
+    tab1, tab2 = st.tabs(['Historico','Tabelas'])
+    with tab1:
+        st.title("🏛️Estatística Monetária")
+        with st.spinner("Carregando dados..."):
+            selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
+            
+        col1, col2 = st.columns([5, 1])
+        with col1:
+            st.plotly_chart(create_chart(selic, selic_atual, 'Taxa de Juros SELIC', 'Taxa de Juros (%)', '%'))
+            st.plotly_chart(create_chart(ipca, ipca_atual, 'IPCA Acumulado 12M', 'IPCA acumulado (%)', '%'))
+            st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
 
-tab1, tab2 = st.tabs(['Historico','Tabelas'])
-with tab1:
-    st.title("🏛️Estatística Monetária")
-    with st.spinner("Carregando dados..."):
-        selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
-        
-    col1, col2 = st.columns([5, 1])
-    with col1:
-        st.plotly_chart(create_chart(selic, selic_atual, 'Taxa de Juros SELIC', 'Taxa de Juros (%)', '%'))
-        st.plotly_chart(create_chart(ipca, ipca_atual, 'IPCA Acumulado 12M', 'IPCA acumulado (%)', '%'))
-        st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
 
-
-    with col2:
-        st.markdown("<br><br><br>", unsafe_allow_html=True)  
-        combined_code = f"""
-            <div style="
-                background-color: #ffffff; 
-                padding: 12px; 
-                border-radius: 8px; 
-                margin: 8px 0; 
-                box-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
-                text-align: center; 
-                font-family: sans-serif; 
-                max-width: 150px; 
-                margin-left: auto; 
-                margin-right: auto;">
-                <!-- Mundo Section -->
-                <span style="font-size: 20px; font-weight: bold; display: block; margin-bottom: 8px; color: black;">Mundo</span>
-                <div style="display: flex; justify-content: center; margin-bottom: 12px;">
-                    <iframe frameborder="0" scrolling="no" height="146" width="108" allowtransparency="true" marginwidth="0" marginheight="0" 
-                    src="https://sslirates.investing.com/index.php?rows=1&bg1=FFFFFF&bg2=F1F5F8&text_color=333333&enable_border=hide&border_color=0452A1&
-                    header_bg=ffffff&header_text=FFFFFF&force_lang=12"></iframe>
+        with col2:
+            st.markdown("<br><br><br>", unsafe_allow_html=True)  
+            combined_code = f"""
+                <div style="
+                    background-color: #ffffff; 
+                    padding: 12px; 
+                    border-radius: 8px; 
+                    margin: 8px 0; 
+                    box-shadow: 2px 2px 4px rgba(0,0,0,0.1); 
+                    text-align: center; 
+                    font-family: sans-serif; 
+                    max-width: 150px; 
+                    margin-left: auto; 
+                    margin-right: auto;">
+                    <!-- Mundo Section -->
+                    <span style="font-size: 20px; font-weight: bold; display: block; margin-bottom: 8px; color: black;">Mundo</span>
+                    <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                        <iframe frameborder="0" scrolling="no" height="146" width="108" allowtransparency="true" marginwidth="0" marginheight="0" 
+                        src="https://sslirates.investing.com/index.php?rows=1&bg1=FFFFFF&bg2=F1F5F8&text_color=333333&enable_border=hide&border_color=0452A1&
+                        header_bg=ffffff&header_text=FFFFFF&force_lang=12"></iframe>
+                    </div>
+                    <!-- Juros Real Section -->
+                    <span style="font-weight: bold; font-size: 14px; color: black; display: block; margin-bottom: 8px;">Juros Real 🇧🇷</span>
+                    <span style="font-size: 20px; color: black; font-weight: normal;">{juros_real:.2f}%</span>
                 </div>
-                <!-- Juros Real Section -->
-                <span style="font-weight: bold; font-size: 14px; color: black; display: block; margin-bottom: 8px;">Juros Real 🇧🇷</span>
-                <span style="font-size: 20px; color: black; font-weight: normal;">{juros_real:.2f}%</span>
-            </div>
-            """
-        st.components.v1.html(combined_code, height=350)
+                """
+            st.components.v1.html(combined_code, height=350)
 
-with tab2:
-    indicadores = {
-        "IPCA Mensal": 433,
-        "IGP-M Mensal": 189,
-        "Taxa SELIC": 432
-    }
+    with tab2:
+        indicadores = {
+            "IPCA Mensal": 433,
+            "IGP-M Mensal": 189,
+            "Taxa SELIC": 432
+        }
 
-    st.title("Indicadores Econômicos - Banco Central")
+        st.title("Indicadores Econômicos - Banco Central")
 
-    indicador_selecionado = st.radio("Escolha o indicador:", list(indicadores.keys()))
+        indicador_selecionado = st.radio("Escolha o indicador:", list(indicadores.keys()))
 
-    start_date = st.date_input("Data de início", pd.to_datetime("2020-01-01").date(), format="DD/MM/YYYY", key="start_date")
-    end_date = st.date_input("Data de término", pd.to_datetime("today").date(), format="DD/MM/YYYY", key="end_date")
+        start_date = st.date_input("Data de início", pd.to_datetime("2020-01-01").date(), format="DD/MM/YYYY", key="start_date")
+        end_date = st.date_input("Data de término", pd.to_datetime("today").date(), format="DD/MM/YYYY", key="end_date")
 
-    # Coletando dados
-    @st.cache_data(ttl=3600)
-    def fetch_bcb_data(codigo, start_date, end_date):
-        try:
-            dados = sgs.get(codigo, start=start_date, end=end_date)
+        # Coletando dados
+        @st.cache_data(ttl=3600)
+        def fetch_bcb_data(codigo, start_date, end_date):
+            try:
+                dados = sgs.get(codigo, start=start_date, end=end_date)
 
-            if dados.empty:
+                if dados.empty:
+                    return None
+
+                dados.columns = [f"{indicador_selecionado} (%)"]
+                dados.index.name = "Data"
+
+                dados = dados.sort_index(ascending=False)
+                dados.index = dados.index.strftime("%d/%m/%Y") 
+
+                return dados
+            except Exception:
                 return None
 
-            dados.columns = [f"{indicador_selecionado} (%)"]
-            dados.index.name = "Data"
+        codigo_indicador = indicadores[indicador_selecionado]
+        dados = fetch_bcb_data(codigo_indicador, start_date, end_date)
 
-            dados = dados.sort_index(ascending=False)
-            dados.index = dados.index.strftime("%d/%m/%Y") 
+        if dados is not None:
+            st.subheader(f"Tabela de Dados - {indicador_selecionado}")
+            st.dataframe(dados)
 
-            return dados
-        except Exception:
-            return None
+            #CSV
+            csv = dados.to_csv(index=True)
+            st.download_button(
+                label="Baixar dados como CSV",
+                data=csv,
+                file_name=f"{indicador_selecionado.lower().replace(' ', '_')}.csv",
+                mime="text/csv",
+            )
+        else:
+            st.warning(f"Nenhum dado encontrado para {indicador_selecionado} no período selecionado.")
 
-    codigo_indicador = indicadores[indicador_selecionado]
-    dados = fetch_bcb_data(codigo_indicador, start_date, end_date)
-
-    if dados is not None:
-        st.subheader(f"Tabela de Dados - {indicador_selecionado}")
-        st.dataframe(dados)
-
-        #CSV
-        csv = dados.to_csv(index=True)
-        st.download_button(
-            label="Baixar dados como CSV",
-            data=csv,
-            file_name=f"{indicador_selecionado.lower().replace(' ', '_')}.csv",
-            mime="text/csv",
-        )
-    else:
-        st.warning(f"Nenhum dado encontrado para {indicador_selecionado} no período selecionado.")
-
-    # Informações adicionais
-    st.write(f"Dados obtidos do Banco Central do Brasil (SGS) - Indicador: {indicador_selecionado}")
-    st.write(f"Período selecionado: {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}")
+        # Informações adicionais
+        st.write(f"Dados obtidos do Banco Central do Brasil (SGS) - Indicador: {indicador_selecionado}")
+        st.write(f"Período selecionado: {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}")
 
 
-    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
-    st.markdown("""
-    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
-        <strong>Fonte:</strong> BCB - Banco Central do Brasil<br>
-     
-    </div>
-    """, unsafe_allow_html=True)
+        st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+            <strong>Fonte:</strong> BCB - Banco Central do Brasil<br>
+        
+        </div>
+        """, unsafe_allow_html=True)
