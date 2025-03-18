@@ -196,10 +196,10 @@ def app():
         except Exception as e:
             st.error(f'Ocorreu um erro: {e}')
 
-    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height: 25px;"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
-        <strong>Fonte:</strong> Fundamentus - Invista Consciente<br>
+        <strong>Fonte:</strong> Fundamentus - Invista Consciente.<br>
      
     </div>
     """, unsafe_allow_html=True)

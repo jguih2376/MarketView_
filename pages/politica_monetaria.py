@@ -7,7 +7,7 @@ import pandas as pd
 
 @st.cache_data
 def get_data():
-    start_date = '2010-01-01' 
+    start_date = '2000-01-01' 
     dolar = sgs.get({'Dólar': 10813}, start=start_date)
     selic = sgs.get({'Selic': 432}, start=start_date)
     ipca = sgs.get({'IPCA': 13522}, start=start_date)
@@ -155,10 +155,10 @@ def app():
         st.write(f"Período selecionado: {start_date.strftime('%d/%m/%Y')} a {end_date.strftime('%d/%m/%Y')}")
 
 
-        st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
-        st.markdown("""
-        <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
-            <strong>Fonte:</strong> BCB - Banco Central do Brasil<br>
-        
-        </div>
-        """, unsafe_allow_html=True)
+    st.markdown('<div style="height: 25px;"></div>', unsafe_allow_html=True)
+    st.markdown("""
+    <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+        <strong>Fonte:</strong> BCB - Banco Central do Brasil<br>
+    
+    </div>
+    """, unsafe_allow_html=True)

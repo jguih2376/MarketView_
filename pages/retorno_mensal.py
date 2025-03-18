@@ -284,9 +284,9 @@ def app():
                 else:
                     st.warning("Nenhum dado disponível para os tickers selecionados.")
 
-    st.markdown('<div style="height: 40px;"></div>', unsafe_allow_html=True)
+    st.markdown('<div style="height: 25px;"></div>', unsafe_allow_html=True)
     st.markdown("""
     <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
-        <strong>Fonte:</strong>Yahoo Finance<br>
+        <strong>Fonte:</strong> Yahoo Finance.<br>
     </div>
     """, unsafe_allow_html=True)
