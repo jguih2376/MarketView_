@@ -7,3 +7,5 @@ plotly
 fundamentus
 python-bcb
 streamlit-autorefresh
+pdfkit
+kaleido
