@@ -12,10 +12,10 @@ from io import BytesIO
 
 
 def app():
-    st.header('📉 Análise Histórica')
+    st.title('📉 Análise Histórica')
     tab1, tab2, tab3 = st.tabs(["Triple Screen","Heatmap", "Desempenho"])
     with tab1:
-        st.title("Triple Screen")
+        st.header("Triple Screen")
 
         # Variável para armazenar o ticker selecionado
         ticker = None

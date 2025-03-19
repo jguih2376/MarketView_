@@ -106,7 +106,7 @@ def app():
             "Taxa SELIC": 432
         }
 
-        st.title("Indicadores Econômicos - Banco Central")
+        st.header("Indicadores Econômicos - Banco Central")
 
         indicador_selecionado = st.radio("Escolha o indicador:", list(indicadores.keys()))
 
