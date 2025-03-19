@@ -22,7 +22,7 @@ def app():
 
         # Seleção do ativo e tipo de gráfico dentro do expander
         with st.expander("Seleção de Ativo", expanded=True):
-            opcao = st.radio('Selecione:', ['Índices', 'Ações', 'Commodities'])
+            opcao = st.selectbox('Selecione:', ['Índices', 'Ações', 'Commodities'])
             
             # Seleção do tipo de gráfico dentro do expander
             col1,col2 = st.columns([3,1])
@@ -252,6 +252,9 @@ def app():
         # Formulário principal
         with st.expander('...', expanded=True):
             opcao = st.radio('Selecione:', ['Índices', 'Ações', 'Commodities'])
+
+                
+
             with st.form(key='form_ativo'):
                 if opcao == 'Índices':
                     indices = {'IBOV': '^BVSP',
@@ -309,16 +312,6 @@ def app():
                     ticker = acoes_dict[escolha]
 
             if analisar:
-
-
-
-
-
-
-
-
-
-
                 data_inicial = ('1999-12-01')
                 data_final = ('2030-12-31')
 
@@ -374,7 +367,6 @@ def app():
 
                 else:
                     st.error("Erro ao buscar os dados. Verifique o ticker ou tente novamente mais tarde.")
-
 
 
     #"_______________________________________________________________________________________________________________________________________________________"
