@@ -17,7 +17,15 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-
+st.markdown(
+    """
+    <style>
+        .reportview-container {
+            background-color: #304c4c;  /* Verde escuro */
+            color: #FFFFFF;  /* Texto branco */
+        }
+    </style>
+    """, unsafe_allow_html=True)
 
 
 st.sidebar.image("assets/logo_mv.jpeg")
@@ -47,5 +55,5 @@ elif pagina == "Fundamentos":
 elif pagina == "Estatística Monetária":
     politica_monetaria.app()
 
-st.set_page_config(page_title="MarketView", page_icon=":guardsman:", layout="wide", initial_sidebar_state="expanded")
+
 
