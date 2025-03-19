@@ -7,7 +7,6 @@ import plotly.graph_objects as go
 from datetime import datetime
 import pdfkit
 import base64
-import locale
 from io import BytesIO
 
 
@@ -168,7 +167,6 @@ def app():
             return df_var
 
         def criar_grafico(ativos_selecionados, dados, normalizado=True, legenda_dict=None):
-            locale.setlocale(locale.LC_TIME,'Portuguese_Brazil.1252')
             fig = go.Figure()
             for ativo in ativos_selecionados:
                 nome_ativo = legenda_dict.get(ativo, ativo)
@@ -203,7 +201,7 @@ def app():
                     margin=dict(r=10)
                 )
 
-                fig.update_xaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot', tickformat="%b %Y")
+                fig.update_xaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
                 fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
             return fig
 
@@ -232,7 +230,7 @@ def app():
             st.session_state.normalizado = True
 
         with st.expander('...', expanded=True):
-            opcao1 = st.selectbox('Selecione:', ['Ações','Índices', 'Commodities'])
+            opcao1 = st.radio ('Selecione:', ['Ações','Índices', 'Commodities'])
             with st.form(key='meu_form'):
                 col1, col2, col3 = st.columns([3, 1, 1])
                 with col1:
