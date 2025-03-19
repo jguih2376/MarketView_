@@ -17,15 +17,7 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
-st.markdown(
-    """
-    <style>
-        .reportview-container {
-            background-color: #304c4c;  /* Verde escuro */
-            color: #FFFFFF;  /* Texto branco */
-        }
-    </style>
-    """, unsafe_allow_html=True)
+
 
 
 st.sidebar.image("assets/logo_mv.jpeg")
