@@ -26,7 +26,7 @@ def app():
     como alertas personalizados e integração com outras ferramentas financeiras.
     """)
 
-
+    st.markdown ('---')
     if st.button("Feedback"):
         st.markdown("Deixe seu [Feedback](https://forms.gle/M3abZwUMnBjBUi1q6)")
 
