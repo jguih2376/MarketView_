@@ -7,6 +7,7 @@ import plotly.graph_objects as go
 from datetime import datetime
 import pdfkit
 import base64
+import locale
 from io import BytesIO
 
 
@@ -167,6 +168,7 @@ def app():
             return df_var
 
         def criar_grafico(ativos_selecionados, dados, normalizado=True, legenda_dict=None):
+            locale.setlocale(locale.LC_TIME,'pt_BR.utf8')
             fig = go.Figure()
             for ativo in ativos_selecionados:
                 nome_ativo = legenda_dict.get(ativo, ativo)
@@ -186,22 +188,23 @@ def app():
                     name=f'{nome_ativo} - Último Preço',
                     showlegend=False
                 ))
-            fig.update_layout(
-                title=f"{'Desempenho Relativo (%)' if normalizado else 'Preço dos Ativos'}",
-                yaxis_title='Performance (%)' if normalizado else 'Preço',
-                xaxis=dict(
-                    tickformat='%b %Y',
-                    tickmode='array',
-                    tickvals=dados.index[::63]
-                ),
-                legend_title='Ativos',
-                legend_orientation='h',
-                plot_bgcolor='rgba(211, 211, 211, 0.10)',
-                height=600,
-                margin=dict(r=10)
-            )
-            fig.update_xaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
-            fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
+                fig.update_layout(
+                    title=f"{'Desempenho Relativo (%)' if normalizado else 'Preço dos Ativos'}",
+                    yaxis_title='Performance (%)' if normalizado else 'Preço',
+                    xaxis=dict(
+                        tickformat='%b %Y',
+                        tickmode='array',
+                        tickvals=dados.index[::63]
+                    ),
+                    legend_title='Ativos',
+                    legend_orientation='h',
+                    plot_bgcolor='rgba(211, 211, 211, 0.10)',
+                    height=600,
+                    margin=dict(r=10)
+                )
+
+                fig.update_xaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot', tickformat="%b %Y")
+                fig.update_yaxes(showgrid=True, gridwidth=0.1, gridcolor='gray', griddash='dot')
             return fig
 
         indices = {'IBOV': '^BVSP', 'EWZ': 'EWZ', 'S&P500': '^GSPC', 'NASDAQ': '^IXIC', 'FTSE100': '^FTSE', 'DAX': '^GDAXI',
