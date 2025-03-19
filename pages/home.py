@@ -19,12 +19,15 @@ def app():
              - Índices de Bolsa Mundial
              - Moedas
              - Commodities.
-''')             
+''')   
+              
     st.write('''
         - 📉**Análise Histórica**
+             - Triple Screen
              - Retorno Mensal
              - Desempenho Relativo
 ''')
+    
     st.write('''
         - 📑**Fundamentos de Ações**
              - Dados Balanço Patrimonial
@@ -32,13 +35,19 @@ def app():
              - Indicadores Fundamentalista
              - Performace entre ações
 ''')
+    
     st.write('''
         - 🏛️**Estatística Monetária**
              - Selic
              - IPCA
              - Juros Real
-             - Dólar
-             
+             - Dólar            
+''')
+    
+    st.write('''
+        - 🏛️**Sobre**
+             - Deixe seu Feedbeck             
+             - Links de Apoio
 ''')
         
     

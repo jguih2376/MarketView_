@@ -11,8 +11,6 @@ import plotly.graph_objects as go
 
 def app():
     st.title("🌎 Panorama do Mercado")
-    st.write("Visão geral do mercado atual.")
-
     tab1, tab2 = st.tabs (['Panorama','TradingView'])
 
     with tab1: #Panorama

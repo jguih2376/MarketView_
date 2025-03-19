@@ -58,9 +58,9 @@ def create_chart(data, atual, title, yaxis_title, unit):
     return fig
 
 def app():
+    st.title("🏛️Estatística Monetária")
     tab1, tab2 = st.tabs(['Historico','Tabelas'])
     with tab1:
-        st.title("🏛️Estatística Monetária")
         with st.spinner("Carregando dados..."):
             selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
             

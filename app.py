@@ -7,7 +7,7 @@ st.set_page_config(
     layout="wide",             # Layout em tela cheia
 )#initial_sidebar_state="collapsed")
 
-from pages import home, calendario_economico, panorama_do_mercado, retorno_mensal, politica_monetaria, fundamentos
+from pages import home, calendario_economico, panorama_do_mercado, retorno_mensal, politica_monetaria, fundamentos, outros
 
 # CSS para esconder todos os nomes da barra lateral
 st.markdown("""
@@ -38,7 +38,7 @@ if "page" not in st.session_state:
 st.sidebar.title("Navegação")
 pagina = st.sidebar.radio(
     "Escolha uma página:", 
-    ["Home", "Calendário Econômico", "Panorama do Mercado", "Análise Histórica", "Fundamentos", "Estatística Monetária"]
+    ["Home", "Calendário Econômico", "Panorama do Mercado", "Análise Histórica", "Fundamentos", "Estatística Monetária", "Sobre"]
 )
 
 # Redirecionar para as páginas conforme a escolha do usuário
@@ -54,6 +54,8 @@ elif pagina == "Fundamentos":
     fundamentos.app()
 elif pagina == "Estatística Monetária":
     politica_monetaria.app()
+elif pagina == "Sobre":
+    outros.app()
 
 
 

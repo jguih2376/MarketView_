@@ -12,7 +12,7 @@ from io import BytesIO
 
 
 def app():
-    st.title('📉 Análise Histórica')
+    st.header('📉 Análise Histórica')
     tab1, tab2, tab3 = st.tabs(["Triple Screen","Heatmap", "Desempenho"])
     with tab1:
         st.title("Triple Screen")
@@ -248,7 +248,7 @@ def app():
 
     #__________________________________________________________________________________________________________________________________________________  
     with tab2:  
-        st.subheader('Retorno Mensal')
+        st.header('Retorno Mensal')
         # Formulário principal
         with st.expander('...', expanded=True):
             opcao = st.radio('Selecione:', ['Índices', 'Ações', 'Commodities'])
@@ -368,10 +368,16 @@ def app():
                 else:
                     st.error("Erro ao buscar os dados. Verifique o ticker ou tente novamente mais tarde.")
 
+        st.markdown('<div style="height: 25px;"></div>', unsafe_allow_html=True)
+        st.markdown("""
+        <div style="text-align: center; font-size: 14px; color: #A9A9A9; margin-top: 20px;">
+            <strong>Fonte:</strong> Yahoo Finance.<br>
+        </div>
+        """, unsafe_allow_html=True)
 
     #"_______________________________________________________________________________________________________________________________________________________"
     with tab3:
-        st.subheader("Desempenho Relativo dos Ativos")
+        st.header("Desempenho Relativo dos Ativos")
 
         @st.cache_data(ttl=600)  
         def carregar_dados(tickers, data_inicio, data_fim):
@@ -446,7 +452,7 @@ def app():
                     'Soja': 'ZS=F', 'Cacau': 'CC=F', 'Café': 'KC=F'}
         acoes = ["PETR4", "VALE3", "ITUB4", "BBAS3", "BBDC4", "RAIZ4", "PRIO3", "VBBR3", "CSAN3", "UGPA3", "BPAC11", "SANB11",
                 "GGBR4", "CSNA3", "USIM5", "JBSS3", "ABEV3", "MRFG3", "BRFS3", "BEEF3", "ELET3", "NEOE3", "CPFE3", "ENGI11",
-                "EQTL3", "SUZB3", "KLBN11", "DTEX3", "RANI3", "MRFG3", "CYRE3", "MRVE3", "EZTC3", "CVCB3", "TRIS3", "WEGE3", "B3SA3"]
+                "EQTL3", "SUZB3", "KLBN11", "DTEX3", "RANI3", "MRFG3", "CYRE3", "MRVE3", "EZTC3", "CVCB3", "TRIS3", "WEGE3", "B3SA3",'EMBR3']
         acoes_dict = {acao: acao + '.SA' for acao in acoes}
 
         # Usar sessão para armazenar os dados gerados
@@ -523,6 +529,7 @@ def app():
                     html_content = f"""
                     <html>
                     <head><title>Desempenho Relativo dos Ativos</title></head>
+                    <meta charset="UTF-8">
                     <body>
                         <h1>Desempenho Relativo dos Ativos</h1>
                         {img_html}
