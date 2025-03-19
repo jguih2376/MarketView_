@@ -168,7 +168,7 @@ def app():
             return df_var
 
         def criar_grafico(ativos_selecionados, dados, normalizado=True, legenda_dict=None):
-            locale.setlocale(locale.LC_TIME,'pt_BR.utf8')
+            locale.setlocale(locale.LC_TIME,'Portuguese_Brazil.1252')
             fig = go.Figure()
             for ativo in ativos_selecionados:
                 nome_ativo = legenda_dict.get(ativo, ativo)
@@ -232,7 +232,7 @@ def app():
             st.session_state.normalizado = True
 
         with st.expander('...', expanded=True):
-            opcao1 = st.selectbox('Selecione:', ['Índices', 'Ações', 'Commodities'])
+            opcao1 = st.selectbox('Selecione:', ['Ações','Índices', 'Commodities'])
             with st.form(key='meu_form'):
                 col1, col2, col3 = st.columns([3, 1, 1])
                 with col1:
