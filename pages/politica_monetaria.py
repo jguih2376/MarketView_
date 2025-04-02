@@ -8,16 +8,16 @@ import pandas as pd
 @st.cache_data
 def get_data():
     start_date = '2000-01-01' 
-    dolar = sgs.get({'Dólar': 10813}, start=start_date)
+   #dolar = sgs.get({'Dólar': 10813}, start=start_date)
     selic = sgs.get({'Selic': 432}, start=start_date)
     ipca = sgs.get({'IPCA': 13522}, start=start_date)
     
-    dolar_atual = dolar.iloc[-1].values[0]
+    #dolar_atual = dolar.iloc[-1].values[0]
     selic_atual = selic.iloc[-1].values[0]
     ipca_atual = ipca.iloc[-1].values[0]
     juros_real = (((1 + selic_atual/100) / (1 + ipca_atual/100)) - 1) * 100
     
-    return selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual
+    return selic, selic_atual, ipca, ipca_atual, juros_real, #dolar, dolar_atual
 
 @st.cache_resource
 def create_chart(data, atual, title, yaxis_title, unit):
@@ -62,13 +62,13 @@ def app():
     tab1, tab2 = st.tabs(['Historico','Tabelas'])
     with tab1:
         with st.spinner("Carregando dados..."):
-            selic, selic_atual, ipca, ipca_atual, juros_real, dolar, dolar_atual = get_data()
+            selic, selic_atual, ipca, ipca_atual, juros_real = get_data()#, dolar, dolar_atual
             
         col1, col2 = st.columns([5, 1])
         with col1:
             st.plotly_chart(create_chart(selic, selic_atual, 'Taxa de Juros SELIC', 'Taxa de Juros (%)', '%'))
             st.plotly_chart(create_chart(ipca, ipca_atual, 'IPCA Acumulado 12M', 'IPCA acumulado (%)', '%'))
-            st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
+            #st.plotly_chart(create_chart(dolar, dolar_atual, 'Cotação do Dólar', 'Valor em R$', 'R$'))
 
 
         with col2:
